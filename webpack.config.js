@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
-  entry: './client/src/app.js',
+  entry: './client/src/app.ts',
   output: {
     path: path.resolve(__dirname, './client/dist'),
+    publicPath: '/client/dist/',
     filename: 'webpack.bundle.js',
   },
   module: {
@@ -22,6 +24,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
@@ -29,7 +35,17 @@ module.exports = {
           },
         ],
       },
-    ]
+    ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './client/src/index.html' })]
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+  },
+  plugins: [
+      new HtmlWebpackPlugin({ template: './client/src/index.html' }), 
+      new VueLoaderPlugin()
+    ]
 };
