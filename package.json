@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc-init": "tsc --init"
+    "tsc-init": "tsc --init",
+    "serve": "webpack serve"
   },
   "author": "Brook Mesfin",
   "license": "ISC",
@@ -19,7 +20,12 @@
     "typescript": "^4.4.3",
     "vue": "^2.6.14",
     "vue-loader": "^15.9.8",
+    "vue-router": "^3.5.2",
+    "vue-template-compiler": "^2.6.14",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.2.1"
   }
 }

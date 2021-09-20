@@ -4,10 +4,9 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
-  entry: './client/src/app.ts',
+  entry: './client/src/index.ts',
   output: {
     path: path.resolve(__dirname, './client/dist'),
-    publicPath: '/client/dist/',
     filename: 'webpack.bundle.js',
   },
   module: {
@@ -22,6 +21,14 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.vue$/,
@@ -43,6 +50,12 @@ module.exports = {
     },
     compress: true,
     port: 9000,
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   plugins: [
       new HtmlWebpackPlugin({ template: './client/src/index.html' }), 
